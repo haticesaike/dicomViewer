@@ -1,1 +1,12 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    color: var(--white);
+    padding: 1rem;
+}
 
+.title {
+    font-size: 2rem;
+}

@@ -42,9 +42,10 @@ table {
 :root {
     --primary: #090c29;
     --blue-dark: #041c4a;
-    --blue-light: #5acce6;
+    --blue-lighter: #5acce6;
+    --blue-light: #0b6a9a;
     --moonstone-blue: #3399cc;
-    --indigo-purple: #2b166b;
+    --indigo-purple: #220770;
     --gray-light: #34495e;
     --white: #ffffff;
     --black: #000000;

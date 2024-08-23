@@ -1,0 +1,35 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    background-color: var(--primary);
+    border: 2px solid var(--black);
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    border: 2px solid var(--black);
+    background-color: var(--primary);
+}
+
+.header {
+    display: flex;
+    flex: 1;
+
+}
+
+.filters {
+    display: flex;
+    flex: 1;
+}

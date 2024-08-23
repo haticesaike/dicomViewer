@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.dateInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dateInputLeft {
+    display: flex;
+    align-items: center;
+    background-color: var(--black);
+    color: var(--white);
+    border-left: 2px solid var(--indigo-purple);
+    border-top: 2px solid var(--indigo-purple);
+    border-bottom: 2px solid var(--indigo-purple);
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    height: 40px;
+    width: 90px;
+}
+
+.dateInputRight {
+    display: flex;
+    align-items: center;
+    background-color: var(--black);
+    color: var(--white);
+    border: 2px solid var(--indigo-purple);
+    border-radius: 0 5px 5px 0;
+    height: 40px;
+    width: 90px;
+}
+
+
+.dateInputLabel {
+    color: var(--white);
+}
+
+.datePlaceholder {
+    color: var(--white);
+}
+
+.labelWithIcon {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    width: 11rem;
+    border: 2px solid var(--indigo-purple);
+    border-radius: 5px;
+    background-color: black;
+}
+
+.multiSelect {
+    white-space: normal;
+    overflow-wrap: break-word;
+}

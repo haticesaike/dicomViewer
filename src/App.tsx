@@ -1,8 +1,7 @@
 import React from 'react';
-import '@mantine/core/styles.css';
 import {MantineProvider} from '@mantine/core';
 import '@mantine/core/styles.css';
-import 'normalize.css';
+import '@mantine/dates/styles.css';
 import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import StudyListPage from "./pages/studyListPage/StudyListPage.tsx";
