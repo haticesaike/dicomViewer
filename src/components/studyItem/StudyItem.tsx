@@ -1,4 +1,7 @@
 import React from 'react';
+import {Button} from '@mantine/core';
+import {FaArrowRight} from 'react-icons/fa';
+import styles from './StudyItem.module.css';
 
 interface PatientItemProps {
     patient: {
@@ -13,16 +16,91 @@ interface PatientItemProps {
     };
 }
 
-const StudyItem: React.FC<PatientItemProps> = ({patient}) => {
+const StudyItem: React.FC<PatientItemProps> = ({}) => {
     return (
-        <div style={{border: '1px solid #ccc', padding: '10px', margin: '10px 0'}}>
-            <h3>{patient.patientName}</h3>
-            <p><strong>MRN:</strong> {patient.mrn}</p>
-            <p><strong>Study Period:</strong> {patient.startDate} - {patient.endDate}</p>
-            <p><strong>Description:</strong> {patient.description}</p>
-            <p><strong>Modality:</strong> {patient.modality}</p>
-            <p><strong>Accession:</strong> {patient.accession}</p>
-            <p><strong>Instances:</strong> {patient.instances}</p>
+        <div className={styles.container}>
+
+            {/*BASIC VIEWER BUTTON*/}
+            <Button
+                className={styles.button}
+                component="a"
+                target="_blank"
+                rel="noopener noreferrer"
+
+                styles={() => ({
+                    root: {
+                        backgroundColor: 'var(--blue-lighter)',
+                        color: 'var(--black)',
+                        borderRadius: '50px',
+                        padding: '10px 20px',
+                        display: 'flex',
+                        width: 'fit-content',
+                        height: '2.5rem',
+                        alignItems: 'center',
+
+                    },
+                })}
+            >
+                <div className={styles.buttonContent}>
+                    <span>Basic Viewer</span>
+                    <FaArrowRight style={{marginTop: '1px'}}/>
+                </div>
+            </Button>
+
+            {/*TOTAL METABOLIC TUMOR VOLUME BUTTON*/}
+            <Button
+                className={styles.button}
+                component="a"
+                target="_blank"
+                rel="noopener noreferrer"
+
+                styles={() => ({
+                    root: {
+                        backgroundColor: 'var(--blue-lighter)',
+                        color: 'var(--black)',
+                        borderRadius: '50px',
+                        padding: '10px 20px',
+                        display: 'flex',
+                        width: 'fit-content',
+                        height: '2.5rem',
+                        alignItems: 'center',
+
+                    },
+                })}
+            >
+                <div className={styles.buttonContent}>
+                    <span>Total Metabolic Tumor Volume</span>
+                    <FaArrowRight style={{marginTop: '1px'}}/>
+                </div>
+            </Button>
+
+
+            {/*MICROSCOPY BUTTON*/}
+            <Button
+                className={styles.button}
+                component="a"
+                target="_blank"
+                rel="noopener noreferrer"
+
+                styles={() => ({
+                    root: {
+                        backgroundColor: 'var(--blue-lighter)',
+                        color: 'var(--black)',
+                        borderRadius: '50px',
+                        padding: '10px 20px',
+                        display: 'flex',
+                        width: 'fit-content',
+                        height: '2.5rem',
+                        alignItems: 'center',
+
+                    },
+                })}
+            >
+                <div className={styles.buttonContent}>
+                    <span>Microscopy</span>
+                    <FaArrowRight style={{marginTop: '1px'}}/>
+                </div>
+            </Button>
         </div>
     );
 };

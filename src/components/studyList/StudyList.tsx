@@ -9,7 +9,6 @@ const PatientList: React.FC = () => {
         <Accordion
             transitionDuration={300}
             chevronPosition="left"
-            radius="md"
             styles={() => ({
                 item: {
                     border: `2px solid var(--indigo-purple)`,
@@ -29,7 +28,7 @@ const PatientList: React.FC = () => {
 
                 },
                 panel: {
-                    backgroundColor: 'var(--blue-dark)',
+                    backgroundColor: 'var(--black)',
                     color: 'var(--white)',
                     borderTop: 'none',
                 },
