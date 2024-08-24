@@ -1,7 +1,13 @@
-function ToolsPanel() {
-    return (
-        <div>ToolsPanel</div>
-    );
-}
+import React from 'react';
+import styles from './ToolsPanel.module.css';
 
-export default ToolsPanel;
+const ToolsPanel: React.FC = () => {
+
+    return (
+        <div className={styles.container}>
+
+        </div>
+    )
+};
+
+export default ToolsPanel

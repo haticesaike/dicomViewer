@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.dicomViewer {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    background-color: var(--black);
+    border: 2px solid var(--blue-lighter);
+}
+
+.header {
+    flex: 1;
+    background-color: var(--black);
+}
+
+.dicomImage {
+    flex: 14;
+    background-color: var(--black);
+}
+
+.panel {
+    flex: 1;
+    background-color: var(--black);
+}

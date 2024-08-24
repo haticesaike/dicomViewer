@@ -3,6 +3,7 @@ import {Button} from '@mantine/core';
 import {FaArrowRight} from 'react-icons/fa';
 import styles from './StudyItem.module.css';
 import {mockPatientData} from '../../data/MockData.tsx';
+import {useNavigate} from 'react-router-dom';
 
 
 interface StudyItemProps {
@@ -10,6 +11,8 @@ interface StudyItemProps {
 }
 
 const StudyItem: React.FC<StudyItemProps> = ({patientId}) => {
+    const navigate = useNavigate();
+
     const selectedPatient = useMemo(() => {
         return mockPatientData.find(patient => patient.id === patientId);
     }, [patientId]);
@@ -22,6 +25,7 @@ const StudyItem: React.FC<StudyItemProps> = ({patientId}) => {
                 {/*BASIC VIEWER BUTTON*/}
                 <Button
                     className={styles.button}
+                    onClick={() => navigate('/dicom-viewer/' + selectedPatient?.id)}
                     component="a"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -52,7 +56,6 @@ const StudyItem: React.FC<StudyItemProps> = ({patientId}) => {
                     component="a"
                     target="_blank"
                     rel="noopener noreferrer"
-
                     styles={() => ({
                         root: {
                             backgroundColor: 'var(--blue-lighter)',
