@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Accordion} from '@mantine/core';
 import {mockPatientData} from '../../data/MockData.tsx';
 import StudyItem from "../studyItem/StudyItem.tsx";
 import styles from './StudyList.module.css';
 
+
 const PatientList: React.FC = () => {
+    const [openedItem, setOpenedItem] = useState<string | null>(null);
+    
     return (
         <Accordion
             transitionDuration={300}
             chevronPosition="left"
+            value={openedItem}
+            onChange={(value: string | null) => setOpenedItem(value)}
             styles={() => ({
                 item: {
                     border: `2px solid var(--indigo-purple)`,
@@ -48,7 +53,7 @@ const PatientList: React.FC = () => {
                         </div>
                     </Accordion.Control>
                     <Accordion.Panel>
-                        <StudyItem patient={patient}/>
+                        <StudyItem patientId={openedItem}/>
                     </Accordion.Panel>
                 </Accordion.Item>
             ))}
