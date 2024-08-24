@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './Filters.module.css';
 import {Input} from '@mantine/core';
 import SortingIcon from "../utils/sortingIcon.tsx";
 import {DateInput} from '@mantine/dates';
 import {Select} from '@mantine/core';
+import {mockPatientData} from "../../data/MockData.tsx";
 
 
 const Filters: React.FC = () => {
@@ -15,16 +16,24 @@ const Filters: React.FC = () => {
     const [instances, setInstances] = useState('');
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
+    const [uniqueModalities, setUniqueModalities] = useState<{ value: string; label: string }[]>([]);
+
+    useEffect(() => {
+        //All modality data joined in one array
+        const allModalities = mockPatientData.flatMap(patient => patient.modality);
+
+        // Unique modality data array create
+        const uniqueModalitiesSet = Array.from(new Set(allModalities));
+
+        const modalityData = uniqueModalitiesSet.map(modality => ({
+            value: modality.toLowerCase(),
+            label: modality.toUpperCase()
+        }));
+
+        setUniqueModalities(modalityData);
+    }, [mockPatientData]);
 
 
-    const mockModalityData = [
-        {value: 'ct', label: 'CT'},
-        {value: 'mri', label: 'MRI'},
-        {value: 'xray', label: 'X-ray'},
-        {value: 'us', label: 'Ultrasound'},
-        {value: 'pet-ct', label: 'PET-CT'},
-        {value: 'nucmed', label: 'Nuclear Medicine'},
-    ];
     return (
         <div className={styles.container}>
 
@@ -121,7 +130,7 @@ const Filters: React.FC = () => {
             {/*MODALITY*/}
             <Select
                 label="Modality"
-                data={mockModalityData}
+                data={uniqueModalities}
                 value={modality}
                 onChange={setModality}
                 styles={() => ({

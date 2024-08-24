@@ -6,7 +6,7 @@ export const mockPatientData = [
         startDate: "2023-05-10T14:30:00",
         endDate: "2023-05-10T15:45:00",
         description: "CT/PT Whole Body",
-        modality: "CT/PT",
+        modality: ["CT", "PT"],
         accession: "ACC001",
         instances: 10163,
         details: [
@@ -21,7 +21,7 @@ export const mockPatientData = [
         startDate: "2023-07-20T09:00:00",
         endDate: "2023-07-20T10:30:00",
         description: "MRI Brain with contrast",
-        modality: "MRI",
+        modality: ["MRI"],
         accession: "ACC002",
         instances: 1500,
         details: [
@@ -37,7 +37,7 @@ export const mockPatientData = [
         startDate: "2023-06-13T11:15:00",
         endDate: "2023-06-13T11:30:00",
         description: "Chest X-ray PA and Lateral",
-        modality: "XRAY",
+        modality: ["XRAY"],
         accession: "ACC003",
         instances: 2,
         details: [
@@ -52,7 +52,7 @@ export const mockPatientData = [
         startDate: "2023-08-01T13:45:00",
         endDate: "2023-08-01T14:30:00",
         description: "Abdominal and Pelvic CT with contrast",
-        modality: "CT",
+        modality: ["CT"],
         accession: "ACC004",
         instances: 1200,
         details: [
@@ -67,7 +67,7 @@ export const mockPatientData = [
         startDate: "2023-04-05T10:00:00",
         endDate: "2023-04-05T11:30:00",
         description: "PET-CT Whole Body",
-        modality: "PET/CT",
+        modality: ["CT", "PET"],
         accession: "ACC005",
         instances: 15000,
         details: [
@@ -82,7 +82,7 @@ export const mockPatientData = [
         startDate: "2023-09-15T08:30:00",
         endDate: "2023-09-15T09:15:00",
         description: "Mammography Screening",
-        modality: "MAMMO",
+        modality: ["MAMMO"],
         accession: "ACC006",
         instances: 4,
         details: [
@@ -99,7 +99,7 @@ export const mockPatientData = [
         startDate: "2023-10-20T14:00:00",
         endDate: "2023-10-20T15:00:00",
         description: "Cardiac MRI",
-        modality: "MRI",
+        modality: ["MRI"],
         accession: "ACC007",
         instances: 2000,
         details: [
@@ -115,7 +115,7 @@ export const mockPatientData = [
         startDate: "2023-11-05T11:30:00",
         endDate: "2023-11-05T12:15:00",
         description: "Abdominal Ultrasound",
-        modality: "US",
+        modality: ["US"],
         accession: "ACC008",
         instances: 50,
         details: [
@@ -132,7 +132,7 @@ export const mockPatientData = [
         startDate: "2023-12-10T09:45:00",
         endDate: "2023-12-10T10:30:00",
         description: "CT Angiography Coronary Arteries",
-        modality: "CT",
+        modality: ["CT"],
         accession: "ACC009",
         instances: 3000,
         details: [
@@ -147,7 +147,7 @@ export const mockPatientData = [
         startDate: "2024-01-15T13:00:00",
         endDate: "2024-01-15T14:30:00",
         description: "Whole Body Bone Scan",
-        modality: "NM",
+        modality: ["NM"],
         accession: "ACC010",
         instances: 120,
         details: [
@@ -162,7 +162,7 @@ export const mockPatientData = [
         startDate: "2024-02-20T10:15:00",
         endDate: "2024-02-20T11:00:00",
         description: "CT Head without contrast",
-        modality: "CT",
+        modality: ["CT"],
         accession: "ACC011",
         instances: 800,
         details: [
@@ -177,7 +177,7 @@ export const mockPatientData = [
         startDate: "2024-03-05T15:30:00",
         endDate: "2024-03-05T16:15:00",
         description: "MRI Knee",
-        modality: "MRI",
+        modality: ["MRI"],
         accession: "ACC012",
         instances: 1000,
         details: [
@@ -194,7 +194,7 @@ export const mockPatientData = [
         startDate: "2024-04-10T08:45:00",
         endDate: "2024-04-10T09:30:00",
         description: "CT Chest with contrast",
-        modality: "CT",
+        modality: ["CT"],
         accession: "ACC013",
         instances: 1500,
         details: [
@@ -209,7 +209,7 @@ export const mockPatientData = [
         startDate: "2024-05-15T11:00:00",
         endDate: "2024-05-15T12:30:00",
         description: "MRI Lumbar Spine",
-        modality: "MRI",
+        modality: ["MRI"],
         accession: "ACC014",
         instances: 1200,
         details: [
@@ -225,7 +225,7 @@ export const mockPatientData = [
         startDate: "2024-06-20T14:15:00",
         endDate: "2024-06-20T15:00:00",
         description: "Renal Ultrasound",
-        modality: "US",
+        modality: ["US"],
         accession: "ACC015",
         instances: 60,
         details: [
@@ -240,7 +240,7 @@ export const mockPatientData = [
         startDate: "2024-07-25T09:30:00",
         endDate: "2024-07-25T10:45:00",
         description: "CT/PT Brain",
-        modality: "CT/PT",
+        modality: ["CT", "PT"],
         accession: "ACC016",
         instances: 8000,
         details: [
@@ -255,7 +255,7 @@ export const mockPatientData = [
         startDate: "2024-08-30T13:00:00",
         endDate: "2024-08-30T13:30:00",
         description: "Chest X-ray",
-        modality: "XRAY",
+        modality: ["XRAY"],
         accession: "ACC017",
         instances: 1,
         details: [
@@ -269,7 +269,7 @@ export const mockPatientData = [
         startDate: "2024-09-05T10:45:00",
         endDate: "2024-09-05T11:30:00",
         description: "CT Sinus",
-        modality: "CT",
+        modality: ["CT"],
         accession: "ACC018",
         instances: 600,
         details: [
@@ -285,7 +285,7 @@ export const mockPatientData = [
         startDate: "2024-10-10T15:15:00",
         endDate: "2024-10-10T16:00:00",
         description: "MRI Shoulder",
-        modality: "MRI",
+        modality: ["MRI"],
         accession: "ACC019",
         instances: 900,
         details: [
@@ -301,7 +301,7 @@ export const mockPatientData = [
         startDate: "2024-11-15T08:30:00",
         endDate: "2024-11-15T09:15:00",
         description: "Abdominal X-ray Series",
-        modality: "XRAY",
+        modality: ["XRAY"],
         accession: "ACC020",
         instances: 3,
         details: [
@@ -317,7 +317,7 @@ export const mockPatientData = [
         startDate: "2024-12-20T11:00:00",
         endDate: "2024-12-20T12:30:00",
         description: "MRI Cervical Spine",
-        modality: "MRI",
+        modality: ["MRI"],
         accession: "ACC021",
         instances: 1100,
         details: [
@@ -334,7 +334,7 @@ export const mockPatientData = [
         startDate: "2025-01-25T14:30:00",
         endDate: "2025-01-25T15:15:00",
         description: "CT Pulmonary Angiogram",
-        modality: "CT",
+        modality: ["CT"],
         accession: "ACC022",
         instances: 2000,
         details: [
@@ -349,7 +349,7 @@ export const mockPatientData = [
         startDate: "2025-02-28T09:45:00",
         endDate: "2025-02-28T10:30:00",
         description: "Thyroid Ultrasound",
-        modality: "US",
+        modality: ["US"],
         accession: "ACC023",
         instances: 40,
         details: [
@@ -364,7 +364,7 @@ export const mockPatientData = [
         startDate: "2025-03-15T13:15:00",
         endDate: "2025-03-15T14:45:00",
         description: "MRI Brain with spectroscopy",
-        modality: "MRI",
+        modality: ["MRI"],
         accession: "ACC024",
         instances: 1800,
         details: [
@@ -382,7 +382,7 @@ export const mockPatientData = [
         startDate: "2025-04-20T10:00:00",
         endDate: "2025-04-20T11:00:00",
         description: "Bone Densitometry",
-        modality: "DEXA",
+        modality: ["DEXA"],
         accession: "ACC025",
         instances: 6,
         details: [

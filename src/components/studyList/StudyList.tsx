@@ -7,7 +7,7 @@ import styles from './StudyList.module.css';
 
 const PatientList: React.FC = () => {
     const [openedItem, setOpenedItem] = useState<string | null>(null);
-    
+
     return (
         <Accordion
             transitionDuration={300}
@@ -47,7 +47,7 @@ const PatientList: React.FC = () => {
                             <span>{patient.mrn}</span>
                             <span>{patient.startDate}</span>
                             <span>{patient.description}</span>
-                            <span>{patient.modality}</span>
+                            <span>{patient.modality.join('/')}</span>
                             <span>{patient.accession}</span>
                             <span>{patient.instances}</span>
                         </div>
