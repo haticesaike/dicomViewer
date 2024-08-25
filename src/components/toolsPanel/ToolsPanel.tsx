@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styles from './ToolsPanel.module.css';
 import {LuArrowRightToLine} from "react-icons/lu";
 import {PiCircleHalfTilt} from "react-icons/pi";
@@ -8,13 +8,24 @@ import CreateReportButton from "../createReportButton/CreateReportButton.tsx";
 import {useNavigate} from 'react-router-dom';
 import {LiaPenSolid} from "react-icons/lia";
 
+function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour12: true
+    });
 
-const ToolsPanel: React.FC = () => {
+    return formatter.format(date).replace(/,/g, '-');
+}
+
+const ToolsPanel = ({patient}: { patient: any }) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<'segmentation' | 'measurements'>('measurements');
 
 
-    const [selectedMeasurement, setSelectedMeasurement] = useState(null);
+    const [selectedMeasurement, setSelectedMeasurement] = useState<number | null>(null);
 
     const measurementsData = [
         {id: 1, name: 'R1', area: '1599.28 mm²', max: '246.00 HU', slice: 'S:2 I:123'},
@@ -22,7 +33,7 @@ const ToolsPanel: React.FC = () => {
         {id: 3, name: 'OrganSER2', area: '4827.25 mm²', max: '217.00 HU', slice: 'S:2 I:123', editable: true},
     ];
 
-    const handleMeasurementClick = (id) => {
+    const handleMeasurementClick = (id: number) => {
         setSelectedMeasurement(id);
     };
     const handleTabClick = (tab: 'segmentation' | 'measurements') => {
@@ -64,8 +75,8 @@ const ToolsPanel: React.FC = () => {
             </div>
 
             <div className={styles.options}>
-                <div className={styles.date}>26-Oct-2015</div>
-                <div className={styles.description}>CT CHEST W CONTRAST</div>
+                <div className={styles.date}>{formatDate(patient.startDate)}</div>
+                <div className={styles.description}>{patient.description}</div>
             </div>
             <div className={styles.measurements}>
                 {activeTab === 'segmentation' ? (

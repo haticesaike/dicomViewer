@@ -1,11 +1,21 @@
-import React from 'react';
 import styles from './ImageHeader.module.css';
 import {IoIosCheckmarkCircle} from "react-icons/io";
 import {MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight} from "react-icons/md";
 import {IoMdInformationCircleOutline} from "react-icons/io";
 
+function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour12: true
+    });
 
-const ImageHeader: React.FC = () => {
+    return formatter.format(date).replace(/,/g, '-');
+}
+
+const ImageHeader = ({patient}: { patient: any }) => {
 
     return (
         <div className={styles.container}>
@@ -14,9 +24,9 @@ const ImageHeader: React.FC = () => {
                     <div className={styles.info}>
                         <IoIosCheckmarkCircle className={styles.CheckmarkIcon}/>
                         <div className={styles.verticalLine}></div>
-                        <div>26-Oct-2015</div>
+                        <div>{formatDate(patient.startDate)}</div>
                         <div className={styles.verticalLine}></div>
-                        <div>Chest 3x3 Soft</div>
+                        <div>{patient.description}</div>
                     </div>
                     <div className={styles.icons}>
                         <MdOutlineKeyboardArrowLeft className={styles.icon}/>
@@ -31,7 +41,7 @@ const ImageHeader: React.FC = () => {
                         <div className={styles.windowWith}>W: 360</div>
                         <div className={styles.windowLevel}>L:36</div>
                     </div>
-                    <div className={styles.dicomInstance}>I: 1/1</div>
+                    <div className={styles.dicomInstance}>1/{patient.details.length}</div>
                 </div>
             </div>
 

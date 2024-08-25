@@ -17,7 +17,6 @@ const StudyItem: React.FC<StudyItemProps> = ({patientId}) => {
         return mockPatientData.find(patient => patient.id === patientId);
     }, [patientId]);
 
-    console.log(patientId)
     return (
         <div className={styles.container}>
 
@@ -25,7 +24,8 @@ const StudyItem: React.FC<StudyItemProps> = ({patientId}) => {
                 {/*BASIC VIEWER BUTTON*/}
                 <Button
                     className={styles.button}
-                    onClick={() => navigate('/dicom-viewer/' + selectedPatient?.id)}
+                    onClick={() => navigate('/dicom-viewer/' + selectedPatient?.id, {state: {patient: selectedPatient}})}
+
                     component="a"
                     target="_blank"
                     rel="noopener noreferrer"

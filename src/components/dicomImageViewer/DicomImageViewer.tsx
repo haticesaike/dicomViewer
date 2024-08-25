@@ -5,6 +5,7 @@ import cornerstoneWebImageLoader from 'cornerstone-web-image-loader';
 import cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import Hammer from 'hammerjs';
 
+
 const DICOM_IMAGE_ID = 'https://marketing.webassets.siemens-healthineers.com/1800000004192212/b89f182dc68a/v/7737adc3758d/pediatric-phoenix-images-for-magnetom-skyra-brain_swi_tra_p2_448_1800000004192212.jpg';
 
 const DicomImageViewer: React.FC = () => {

@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {useState, useEffect} from 'react';
 import styles from './Filters.module.css';
 import {Input} from '@mantine/core';
 import SortingIcon from "../utils/sortingIcon.tsx";
@@ -6,8 +7,30 @@ import {DateInput} from '@mantine/dates';
 import {Select} from '@mantine/core';
 import {mockPatientData} from "../../data/MockData.tsx";
 
+interface Detail {
+    description: string;
+    series: number;
+    modality: string;
+    instances: number;
+}
 
-const Filters: React.FC = () => {
+interface PatientData {
+    id: string;
+    patientName: string;
+    mrn: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    modality: string[];
+    accession: string;
+    instances: number;
+    details: Detail[];
+}
+
+const Filters = ({filteredPatients, setFilteredPatients}: {
+    filteredPatients: PatientData[];
+    setFilteredPatients: React.Dispatch<React.SetStateAction<PatientData[]>>
+}) => {
     const [patientName, setPatientName] = useState('');
     const [mrn, setMrn] = useState('');
     const [description, setDescription] = useState('');
@@ -18,11 +41,9 @@ const Filters: React.FC = () => {
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [uniqueModalities, setUniqueModalities] = useState<{ value: string; label: string }[]>([]);
 
-    useEffect(() => {
-        //All modality data joined in one array
-        const allModalities = mockPatientData.flatMap(patient => patient.modality);
 
-        // Unique modality data array create
+    useEffect(() => {
+        const allModalities = filteredPatients.flatMap(patient => patient.modality);
         const uniqueModalitiesSet = Array.from(new Set(allModalities));
 
         const modalityData = uniqueModalitiesSet.map(modality => ({
@@ -31,13 +52,50 @@ const Filters: React.FC = () => {
         }));
 
         setUniqueModalities(modalityData);
-    }, [mockPatientData]);
+    }, [filteredPatients]);
 
+    const handleInputChange = (criteria: keyof PatientData, value: string | number | Date) => {
+        // Reset all other states except the one being changed
+        setPatientName('');
+        setMrn('');
+        setDescription('');
+        setModality('');
+        setAccession('');
+        setInstances('');
+        setStartDate(null);
+        setEndDate(null);
 
+        if (criteria !== 'details') {
+            setFilteredPatients(
+                mockPatientData.filter((patient) => {
+                    const patientValue = patient[criteria];
+
+                    if (typeof patientValue === 'string' && typeof value === 'string') {
+                        return patientValue.toLowerCase().includes(value.toLowerCase());
+                    }
+
+                    if (typeof patientValue === 'number') {
+                        return String(patientValue).includes(value.toString());
+                    }
+
+                    if (criteria === 'startDate' || criteria === 'endDate') {
+                        const patientDate = new Date(patientValue as string);
+                        const filterDate = new Date(value);
+
+                        return (
+                            patientDate.getFullYear() === filterDate.getFullYear() &&
+                            patientDate.getMonth() === filterDate.getMonth() &&
+                            patientDate.getDate() === filterDate.getDate()
+                        );
+                    }
+
+                    return false;
+                })
+            );
+        }
+    };
     return (
         <div className={styles.container}>
-
-
             {/*PATIENT NAME*/}
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
@@ -46,7 +104,10 @@ const Filters: React.FC = () => {
                 </div>
                 <Input className={styles.input}
                        value={patientName}
-                       onChange={(e) => setPatientName(e.target.value)}
+                       onChange={(e) => {
+                           handleInputChange('patientName', e.target.value);
+                           setPatientName(e.target.value);
+                       }}
                        styles={() => ({
                            input: {
                                backgroundColor: 'var(--black)',
@@ -56,7 +117,6 @@ const Filters: React.FC = () => {
                        })}/>
             </Input.Wrapper>
 
-
             {/*MRN*/}
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
@@ -65,7 +125,10 @@ const Filters: React.FC = () => {
                 </div>
                 <Input className={styles.input}
                        value={mrn}
-                       onChange={(e) => setMrn(e.target.value)}
+                       onChange={(e) => {
+                           handleInputChange('mrn', e.target.value);
+                           setMrn(e.target.value);
+                       }}
                        styles={() => ({
                            input: {
                                backgroundColor: 'var(--black)',
@@ -79,7 +142,10 @@ const Filters: React.FC = () => {
             <div className={styles.dateInputContainer}>
                 <DateInput
                     value={startDate}
-                    onChange={setStartDate}
+                    onChange={(date) => {
+                        handleInputChange('startDate', date as Date);
+                        setStartDate(date);
+                    }}
                     label={
                         <div className={styles.labelWithIcon}>
                             Study Date
@@ -94,7 +160,10 @@ const Filters: React.FC = () => {
                 />
                 <DateInput
                     value={endDate}
-                    onChange={setEndDate}
+                    onChange={(date) => {
+                        handleInputChange('endDate', date as Date);
+                        setEndDate(date);
+                    }}
                     label={
                         <div className={styles.labelWithIcon} style={{marginBottom: "1.8rem"}}>
                         </div>
@@ -107,7 +176,6 @@ const Filters: React.FC = () => {
                 />
             </div>
 
-
             {/*DESCRIPTION*/}
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
@@ -116,7 +184,10 @@ const Filters: React.FC = () => {
                 </div>
                 <Input className={styles.input}
                        value={description}
-                       onChange={(e) => setDescription(e.target.value)}
+                       onChange={(e) => {
+                           handleInputChange('description', e.target.value);
+                           setDescription(e.target.value);
+                       }}
                        styles={() => ({
                            input: {
                                backgroundColor: 'var(--black)',
@@ -126,13 +197,15 @@ const Filters: React.FC = () => {
                        })}/>
             </Input.Wrapper>
 
-
             {/*MODALITY*/}
             <Select
                 label="Modality"
                 data={uniqueModalities}
                 value={modality}
-                onChange={setModality}
+                onChange={(value) => {
+                    handleInputChange('modality', value || '');
+                    setModality(value);
+                }}
                 styles={() => ({
                     input: {
                         backgroundColor: 'var(--black)',
@@ -141,15 +214,12 @@ const Filters: React.FC = () => {
                         width: '11rem',
                         border: '2px solid var(--indigo-purple)',
                         height: '2.5rem',
-
                     },
                     label: {
                         marginBottom: '10px',
                     },
-
                 })}
             />
-
 
             {/*ACCESSION*/}
             <Input.Wrapper>
@@ -159,7 +229,10 @@ const Filters: React.FC = () => {
                 </div>
                 <Input className={styles.input}
                        value={accession}
-                       onChange={(e) => setAccession(e.target.value)}
+                       onChange={(e) => {
+                           handleInputChange('accession', e.target.value);
+                           setAccession(e.target.value);
+                       }}
                        styles={() => ({
                            input: {
                                backgroundColor: 'var(--black)',
@@ -169,7 +242,6 @@ const Filters: React.FC = () => {
                        })}/>
             </Input.Wrapper>
 
-
             {/*INSTANCES*/}
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
@@ -178,7 +250,10 @@ const Filters: React.FC = () => {
                 </div>
                 <Input className={styles.input}
                        value={instances}
-                       onChange={(e) => setInstances(e.target.value)}
+                       onChange={(e) => {
+                           handleInputChange('instances', e.target.value);
+                           setInstances(e.target.value);
+                       }}
                        styles={() => ({
                            input: {
                                backgroundColor: 'var(--black)',
