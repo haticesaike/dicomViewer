@@ -2,9 +2,12 @@ import React from 'react';
 import styles from './DicomViewerPage.module.css';
 import ImageHeader from "../../components/imageHeader/ImageHeader.tsx";
 import ToolsPanel from "../../components/toolsPanel/ToolsPanel.tsx";
+import DicomImageViewer from "../../components/dicomImageViewer/DicomImageViewer.tsx";
+
 
 const DicomViewerPage: React.FC = () => {
 
+ 
     return (
         <div className={styles.container}>
             <div className={styles.dicomViewer}>
@@ -12,6 +15,8 @@ const DicomViewerPage: React.FC = () => {
                     <ImageHeader/>
                 </div>
                 <div className={styles.dicomImage}>
+                    {/*<img className={styles.image} src="https://picsum.photos/600/300" alt=""/>*/}
+                    <DicomImageViewer/>
                 </div>
             </div>
             <div className={styles.panel}><ToolsPanel/>

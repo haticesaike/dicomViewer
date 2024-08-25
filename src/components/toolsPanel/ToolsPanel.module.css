@@ -1,0 +1,129 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+
+}
+
+.back {
+    font-size: 1.5rem;
+    color: var(--moonstone-blue);
+    flex: 1;
+    background-color: var(--primary);
+}
+
+.back:hover {
+    cursor: pointer;
+    color: var(--white);
+}
+
+.info {
+    display: flex;
+    flex: 2;
+    background-color: var(--primary);
+    color: var(--moonstone-blue);
+    font-size: 0.8rem;
+
+
+}
+
+.tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    justify-content: end;
+    padding: 10px 5px 2px 5px;
+    cursor: pointer;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    border-radius: 5px;
+    height: 3rem;
+}
+
+
+.activeTab {
+    background-color: var(--indigo-purple);
+    color: var(--white);
+}
+
+.icon {
+    font-size: 2rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    gap: 0.5rem;
+    padding: 10px 0;
+
+}
+
+.date {
+    color: var(--white);
+}
+
+.description {
+    color: var(--moonstone-blue);
+
+}
+
+.measurements {
+    flex: 20;
+    background-color: #0a0a0a;
+    color: var(--white);
+    font-size: 0.7rem;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--indigo-purple);
+    color: var(--white);
+    padding: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 5px;
+}
+
+
+.measurementItem {
+    padding: 10px;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.measurementItem:hover {
+    background-color: var(--rich-black);
+}
+
+
+.selected {
+    background-color: #1e90ff;
+    border-left-color: #1e90ff;
+}
+
+.measurementHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.editIcon {
+    color: #1e90ff;
+    cursor: pointer;
+}
+
+.measurementDetails {
+    font-size: 12px;
+    color: #cfcfcf;
+}
+
+
