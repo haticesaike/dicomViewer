@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# DICOM Viewer Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje, tıbbi görüntüleme alanında kullanılan DICOM (Digital Imaging and Communications in Medicine) formatındaki görüntüleri web tarayıcısında görüntülemek için Cornerstone.js kütüphanesini kullanan bir web uygulamasıdır. Uygulama, kullanıcıların DICOM görüntülerini yüklemesine, görüntü üzerinde dikdörtgen ROI (Region of Interest) seçimi yapmasına ve bu seçimlerle ilgili bilgileri saklamasına olanak tanır.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Özellikler
 
-## Expanding the ESLint configuration
+### 1. Anasayfa
+- Hasta listesi görüntüleme 
+- Hasta detaylarını gösterme (Expand/modal)
+- Filtreleme(Search)
+- DICOM Viewer'a yönlendirme
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 2. DICOM Viewer
+- Cornerstone.js kullanarak DICOM görüntülerini görüntüleme
+- Rectangular ROI (Region of Interest) tool'u ile seçim yapabilme
+- Seçimleri sağ panelde listeleme ve yönetme
 
-- Configure the top-level `parserOptions` property like this:
+## Teknolojiler
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- React
+- TypeScript
+- Vite
+- Cornerstone.js
+- React Router
+- Mantine UI
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Navigasyon
+React Router kullanılarak sayfa yönlendirmeleri yönetilmiştir.
+Bu yapı, uygulamanın ölçeklenebilir ve bakımı kolay olmasını sağlar, aynı zamanda hızlı sayfa geçişleri ve etkili state yönetimi sunar.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Screenshots
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+![App Screenshot](https://github.com/haticesaike/dicomViewer/blob/main/src/assets/chrome_wkOs4kTs2A.png?raw=true)
+
+![App Screenshot](https://github.com/haticesaike/dicomViewer/blob/main/src/assets/chrome_SliLMiGmra.png?raw=true)
+
+
+
+## Kurulum
+
+Bu projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
+
+1. **Depoyu Klonlayın:**
+
+   ```bash
+   git clone https://github.com/kullaniciadi/dicom-viewer.git
+   cd dicom-viewer
+
+2. **Bağımlılıkları Yükleyin:**
+
+   ```bash
+   npm install
+
+3. **Uygulamayı Başlatın:**
+
+      ```bash
+      npm run dev
+
