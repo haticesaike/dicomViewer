@@ -167,3 +167,8 @@
     font-size: 0.8rem;
 }
 
+.reportButtons {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 3rem;
+}

@@ -56,9 +56,10 @@ const StudyItem: React.FC<StudyItemProps> = ({patientId}) => {
                     component="a"
                     target="_blank"
                     rel="noopener noreferrer"
+                    disabled={true}
                     styles={() => ({
                         root: {
-                            backgroundColor: 'var(--blue-lighter)',
+                            backgroundColor: 'gray',
                             color: 'var(--black)',
                             borderRadius: '50px',
                             padding: '10px 20px',
@@ -83,10 +84,10 @@ const StudyItem: React.FC<StudyItemProps> = ({patientId}) => {
                     component="a"
                     target="_blank"
                     rel="noopener noreferrer"
-
+                    disabled={true}
                     styles={() => ({
                         root: {
-                            backgroundColor: 'var(--blue-lighter)',
+                            backgroundColor: 'gray',
                             color: 'var(--black)',
                             borderRadius: '50px',
                             padding: '10px 20px',

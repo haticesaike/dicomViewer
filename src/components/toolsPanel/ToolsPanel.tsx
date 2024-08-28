@@ -150,7 +150,7 @@ const ToolsPanel = ({patient}: { patient: any }) => {
                     </div>
                 )}
             </div>
-            <div>
+            <div className={styles.reportButtons}>
                 <ExportButton/>
                 <CreateReportButton/>
             </div>
