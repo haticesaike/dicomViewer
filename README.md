@@ -33,7 +33,7 @@ Bu yapı, uygulamanın ölçeklenebilir ve bakımı kolay olmasını sağlar, ay
 
 ![App Screenshot](https://github.com/haticesaike/dicomViewer/blob/main/src/assets/chrome_wkOs4kTs2A.png?raw=true)
 
-![App Screenshot](https://github.com/haticesaike/dicomViewer/blob/main/src/assets/chrome_SliLMiGmra.png?raw=true)
+![App Screenshot](https://github.com/haticesaike/dicomViewer/blob/main/src/assets/chrome_ke6Ixn3nx5.png?raw=true)
 
 
 
