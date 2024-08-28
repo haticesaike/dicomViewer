@@ -90,22 +90,39 @@
     border-radius: 5px;
 }
 
+.measurementCover {
+    display: flex;
+
+}
+
+.measurementIndex {
+    background-color: var(--primary);
+    flex: 1;
+    padding: 10px;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    margin-bottom: 5px;
+    text-align: center;
+    color: var(--blue-lighter);
+    font-size: 1rem;
+}
 
 .measurementItem {
+    flex: 7;
     padding: 10px;
     border-left: 3px solid transparent;
     cursor: pointer;
     margin-bottom: 5px;
 }
 
-.measurementItem:hover {
-    background-color: var(--rich-black);
+.measurementIndex:hover {
+    background-color: var(--indigo-purple);
 }
 
 
 .selected {
-    background-color: #1e90ff;
-    border-left-color: #1e90ff;
+    background-color: var(--blue-lighter);
+    color: var(--white);
 }
 
 .measurementHeader {
@@ -116,14 +133,12 @@
     margin-bottom: 5px;
 }
 
-.editIcon {
-    color: #1e90ff;
-    cursor: pointer;
+.editButton {
+    font-size: 1.2rem;
 }
 
-.measurementDetails {
-    font-size: 12px;
-    color: #cfcfcf;
+.measurementLabel {
+    color: var(--blue-lighter);
+    font-size: 0.8rem;
 }
-
 
