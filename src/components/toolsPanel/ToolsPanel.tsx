@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './ToolsPanel.module.css';
 import {LuArrowRightToLine} from "react-icons/lu";
 import {PiCircleHalfTilt} from "react-icons/pi";
@@ -6,7 +6,8 @@ import {TbArrowUpRightCircle} from "react-icons/tb";
 import ExportButton from "../exportButton/ExportButton.tsx";
 import CreateReportButton from "../createReportButton/CreateReportButton.tsx";
 import {useNavigate} from 'react-router-dom';
-import {LiaPenSolid} from "react-icons/lia";
+import {useAtom} from 'jotai'
+import {toolStateAtom} from "../../jotai/atoms.tsx";
 
 function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -20,18 +21,16 @@ function formatDate(dateString: string): string {
     return formatter.format(date).replace(/,/g, '-');
 }
 
-const ToolsPanel = ({patient}: { patient: any }) => {
+const ToolsPanel = ({
+                        patient,
+                    }: {
+    patient: any,
+}) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<'segmentation' | 'measurements'>('measurements');
-
-
     const [selectedMeasurement, setSelectedMeasurement] = useState<number | null>(null);
 
-    const measurementsData = [
-        {id: 1, name: 'R1', area: '1599.28 mm²', max: '246.00 HU', slice: 'S:2 I:123'},
-        {id: 2, name: 'OrganSER1', area: '3535.25 mm²', max: '198.00 HU', slice: 'S:2 I:123'},
-        {id: 3, name: 'OrganSER2', area: '4827.25 mm²', max: '217.00 HU', slice: 'S:2 I:123', editable: true},
-    ];
+    const [toolState,] = useAtom(toolStateAtom)
 
     const handleMeasurementClick = (id: number) => {
         setSelectedMeasurement(id);
@@ -43,6 +42,13 @@ const ToolsPanel = ({patient}: { patient: any }) => {
     const handleButtonClick = () => {
         navigate('/');
     };
+
+    useEffect(() => {
+        console.log(toolState)
+    }, [
+        toolState
+    ]);
+
     return (
         <div className={styles.container}>
             <div className={styles.back} onClick={handleButtonClick}>
@@ -87,28 +93,25 @@ const ToolsPanel = ({patient}: { patient: any }) => {
                     <div className={styles.measurementsContainer}>
                         <div className={styles.header}>
                             <span>MEASUREMENTS</span>
-                            <span>{measurementsData.length}</span>
+                            <span>{toolState.length}</span>
                         </div>
                         <div className={styles.measurementsList}>
-                            {measurementsData.map((measurement) => (
+                            {toolState && toolState.length > 0 && toolState.map((measurement, index: number) => (
                                 <div
-                                    key={measurement.id}
+                                    key={measurement.uuid}
                                     className={`${styles.measurementItem} ${
-                                        selectedMeasurement === measurement.id ? styles.selected : ''
+                                        selectedMeasurement === measurement.uuid ? styles.selected : ''
                                     }`}
-                                    onClick={() => handleMeasurementClick(measurement.id)}
+                                    onClick={() => handleMeasurementClick(measurement.uuid)}
                                 >
                                     <div className={styles.measurementHeader}>
-                                        <span>{measurement.id}</span>
-                                        <span>{measurement.name}</span>
-                                        {measurement.editable &&
-                                            <span className={styles.editIcon}><LiaPenSolid/></span>}
+                                        <span>{index + 1}</span>
+                                        <span>{''}</span>
+
                                     </div>
                                     <div className={styles.measurementDetails}>
-                                        <p>{measurement.area}</p>
-                                        <p>
-                                            Max: {measurement.max} ({measurement.slice})
-                                        </p>
+                                        <p>{measurement.cachedStats?.area ? (measurement.cachedStats.area / 1).toFixed(2) : ' N/A '}mm²</p>
+                                        <p>Max: {measurement.cachedStats?.max ? measurement.cachedStats.max : ' N/A '}mm²</p>
                                     </div>
                                 </div>
                             ))}

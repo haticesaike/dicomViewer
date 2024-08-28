@@ -4,12 +4,17 @@ import * as dicomParser from 'dicom-parser';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import * as cornerstoneTools from 'cornerstone-tools';
 import Hammer from 'hammerjs';
+import {useAtom} from 'jotai'
+import {toolStateAtom} from "../../jotai/atoms.tsx";
 
 const DICOM_IMAGE_ID = 'http://localhost:5173/example.dcm';
 
-const DicomImageViewer: React.FC = () => {
+
+const DicomImageViewer = () => {
     const viewerRef = useRef<HTMLDivElement>(null);
     const [viewport, setViewport] = useState(cornerstone.getDefaultViewport(null, undefined));
+    const [, setToolState] = useAtom(toolStateAtom)
+
 
     useEffect(() => {
         const element = viewerRef.current;
@@ -17,11 +22,11 @@ const DicomImageViewer: React.FC = () => {
         if (!element) {
             return;
         }
-
         cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
         cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
         cornerstoneTools.external.cornerstone = cornerstone;
         cornerstoneTools.external.Hammer = Hammer;
+
 
         const config = {
             maxWebWorkers: navigator.hardwareConcurrency || 1,
@@ -35,11 +40,58 @@ const DicomImageViewer: React.FC = () => {
         };
 
         cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
+        cornerstoneTools.init([
+            {
+                moduleName: 'globalConfiguration',
+                configuration: {
+                    showSVGCursors: true,
+                },
+            },
+            {
+                moduleName: 'segmentation',
+                configuration: {
+                    outlineWidth: 2,
+                },
+            },
+        ]);
+        cornerstone.enable(element);
 
         const loadImage = async () => {
             try {
                 await cornerstone.loadAndCacheImage(`wadouri:${DICOM_IMAGE_ID}`).then((image) => {
                     cornerstone.displayImage(element, image);
+                    onImageRendered();
+                    const RectangleRoiTool = cornerstoneTools.RectangleRoiTool;
+                    cornerstoneTools.addTool(RectangleRoiTool)
+                    cornerstoneTools.setToolActive('RectangleRoi', {
+                        mouseButtonMask: 1,
+                    })
+
+                    const PanTool = cornerstoneTools.PanTool;
+
+                    cornerstoneTools.addTool(PanTool)
+                    cornerstoneTools.setToolActive('Pan', {
+                        mouseButtonMask: 4,
+                    })
+
+                    const ZoomMouseWheelTool = cornerstoneTools.ZoomMouseWheelTool;
+
+                    const updateToolStateLength = () => {
+                        const value = cornerstoneTools.getToolState(element, 'RectangleRoi');
+                        setTimeout(() => {
+                            setToolState(
+                                value.data.map((item: any) => {
+                                    return item
+                                })
+                                // for cached tool state
+                            );
+                        }, 1000)
+                    };
+
+                    element.addEventListener(cornerstoneTools.EVENTS.MEASUREMENT_ADDED, updateToolStateLength);
+
+                    cornerstoneTools.addTool(ZoomMouseWheelTool)
+                    cornerstoneTools.setToolActive('ZoomMouseWheel', {mouseButtonMask: 4})
 
 
                 });
@@ -48,24 +100,16 @@ const DicomImageViewer: React.FC = () => {
             }
         };
 
-        loadImage().then(() => {
-            cornerstoneTools.addStackStateManager(element, ['stack']);
-            cornerstoneTools.addToolState(element, 'RectangleROITool', {
-                imageIds: [DICOM_IMAGE_ID],
-                currentImageIdIndex: 0
-            });
-        })
-        cornerstone.enable(element);
-
+        loadImage().then();
 
         return () => {
-            if (element) {
-                element.removeEventListener('cornerstoneimagerendered', onImageRendered);
-            }
-            window.removeEventListener('resize', onWindowResize);
             cornerstone.disable(element);
-        };
+            cornerstoneTools.removeTool(cornerstoneTools.RectangleRoiTool)
+            cornerstoneTools.removeTool(cornerstoneTools.PanTool)
+            cornerstoneTools.removeTool(cornerstoneTools.ZoomMouseWheelTool)
+        }
     }, []);
+
 
     const onImageRendered = () => {
         const element = viewerRef.current;
@@ -73,22 +117,20 @@ const DicomImageViewer: React.FC = () => {
             const viewport = cornerstone.getViewport(element);
             setViewport(viewport);
         }
-    };
+        if (!element) {
+            return;
 
-
-    const onWindowResize = () => {
-        const element = viewerRef.current;
-        if (element) {
-            cornerstone.resize(element);
         }
+
     };
+
 
     return (
         <div
             ref={viewerRef}
             style={{
-                width: '512px',
-                height: '512px',
+                width: '100%',
+                height: '100%',
                 position: 'relative',
                 color: 'white'
             }}
