@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './DicomViewerPage.module.css';
 import ImageHeader from "../../components/imageHeader/ImageHeader.tsx";
 import ToolsPanel from "../../components/toolsPanel/ToolsPanel.tsx";
