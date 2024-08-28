@@ -24,10 +24,15 @@ Bu proje, tıbbi görüntüleme alanında kullanılan DICOM (Digital Imaging and
 - Cornerstone.js
 - React Router
 - Mantine UI
+- Jotai
 
 ### Navigasyon
 React Router kullanılarak sayfa yönlendirmeleri yönetilmiştir.
 Bu yapı, uygulamanın ölçeklenebilir ve bakımı kolay olmasını sağlar, aynı zamanda hızlı sayfa geçişleri ve etkili state yönetimi sunar.
+
+### State Management
+Bu projede, state yönetimi için Jotai kullanıldı. Jotai, React uygulamalarında durumu yönetmek için hafif ve etkili bir çözüm sunar. Basitliği ve performans avantajları nedeniyle, özellikle küçük ve orta ölçekli projeler için ideal bir tercihtir. Bu projede, Jotai kullanılarak durum yönetimi kolaylaştırıldı ve bileşenler arasındaki veri akışı daha okunabilir hale getirildi.
+
 
 ### Screenshots
 
