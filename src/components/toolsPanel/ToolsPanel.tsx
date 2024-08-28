@@ -9,7 +9,8 @@ import {useNavigate} from 'react-router-dom';
 import {useAtom} from 'jotai';
 import {toolStateAtom} from "../../jotai/atoms.tsx";
 import {TiPencil} from "react-icons/ti";
-import Modal from '../modal/Modal';  // Import the modal component
+import Modal from '../modal/Modal';
+import {IoClose} from "react-icons/io5";
 
 function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -27,11 +28,10 @@ const ToolsPanel = ({patient}: { patient: any }) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<'segmentation' | 'measurements'>('measurements');
     const [selectedMeasurement, setSelectedMeasurement] = useState<number | null>(null);
-    const [toolState,] = useAtom(toolStateAtom);
+    const [toolState, setToolState] = useAtom(toolStateAtom);
     const [labelState, setLabelState] = useState<string[]>(() => toolState.map(() => ''));
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [editLabelIndex, setEditLabelIndex] = useState<number | null>(null);
-    console.log('ada', labelState)
     const handleMeasurementClick = (id: number) => {
         setSelectedMeasurement(id);
     };
@@ -60,9 +60,15 @@ const ToolsPanel = ({patient}: { patient: any }) => {
         setEditLabelIndex(null);
     };
 
-    useEffect(() => {
-        console.log(toolState);
-    }, [toolState]);
+    const handleDeleteButtonClick = (id: string) => {
+        toolState.forEach((tool, index) => {
+            if (tool.uuid === id) {
+                setToolState((prev) => prev.filter((tool, i) => i !== index));
+            }
+        })
+
+    };
+
 
     return (
         <div className={styles.container}>
@@ -104,11 +110,21 @@ const ToolsPanel = ({patient}: { patient: any }) => {
                         <div className={styles.measurementsList}>
                             {toolState && toolState.length > 0 && toolState.map((measurement, index: number) => (
                                 <div key={measurement.uuid} className={styles.measurementCover}>
-                                    <div className={`${styles.measurementIndex} ${
-                                        selectedMeasurement === measurement.uuid ? styles.selected : ''
-                                    }`} onClick={() => handleMeasurementClick(measurement.uuid)}
+                                    <div
+                                        className={`${styles.measurementIndex} ${
+                                            selectedMeasurement === measurement.uuid ? styles.selected : ''
+                                        }`}
+                                        onClick={() => handleMeasurementClick(measurement.uuid)}
                                     >
-                                        {index + 1}
+                                        {/* Index */}
+                                        <span className={styles.index}>{index + 1}</span>
+
+                                        {/* Remove icon */}
+                                        <span onClick={() => handleDeleteButtonClick(measurement.uuid)}
+                                              className={styles.removeIcon}>
+    <IoClose/>
+
+  </span>
                                     </div>
 
                                     <div className={styles.measurementItem}>
