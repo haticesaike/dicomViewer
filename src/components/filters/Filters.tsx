@@ -94,13 +94,19 @@ const Filters = ({filteredPatients, setFilteredPatients}: {
             );
         }
     };
+
+    const handleReverse = () => {
+        setFilteredPatients(filteredPatients.toReversed());
+    }
     return (
         <div className={styles.container}>
             {/*PATIENT NAME*/}
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
                     <Input.Label>Patient Name</Input.Label>
-                    <SortingIcon/>
+                    <div onClick={handleReverse}>
+                        <SortingIcon/>
+                    </div>
                 </div>
                 <Input className={styles.input}
                        value={patientName}
@@ -121,7 +127,9 @@ const Filters = ({filteredPatients, setFilteredPatients}: {
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
                     <Input.Label>MRN</Input.Label>
-                    <SortingIcon/>
+                    <div onClick={handleReverse}>
+                        <SortingIcon/>
+                    </div>
                 </div>
                 <Input className={styles.input}
                        value={mrn}
@@ -149,7 +157,9 @@ const Filters = ({filteredPatients, setFilteredPatients}: {
                     label={
                         <div className={styles.labelWithIcon}>
                             Study Date
-                            <SortingIcon/>
+                            <div onClick={handleReverse}>
+                                <SortingIcon/>
+                            </div>
                         </div>
                     }
                     placeholder="Start Date"
@@ -180,7 +190,9 @@ const Filters = ({filteredPatients, setFilteredPatients}: {
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
                     <Input.Label>Description</Input.Label>
-                    <SortingIcon/>
+                    <div onClick={handleReverse}>
+                        <SortingIcon/>
+                    </div>
                 </div>
                 <Input className={styles.input}
                        value={description}
@@ -225,7 +237,9 @@ const Filters = ({filteredPatients, setFilteredPatients}: {
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
                     <Input.Label>Accession #</Input.Label>
-                    <SortingIcon/>
+                    <div onClick={handleReverse}>
+                        <SortingIcon/>
+                    </div>
                 </div>
                 <Input className={styles.input}
                        value={accession}
@@ -246,7 +260,9 @@ const Filters = ({filteredPatients, setFilteredPatients}: {
             <Input.Wrapper>
                 <div className={styles.inputWrapper}>
                     <Input.Label>Instances</Input.Label>
-                    <SortingIcon/>
+                    <div onClick={handleReverse}>
+                        <SortingIcon/>
+                    </div>
                 </div>
                 <Input className={styles.input}
                        value={instances}
